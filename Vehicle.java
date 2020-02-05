@@ -1,4 +1,3 @@
-import java.util.Math;
 public class Vehicle{
     //Instances
     private String color;
@@ -12,6 +11,7 @@ public class Vehicle{
     private boolean carIsOn;
     private boolean carIsWorking;
     private double crashPotentialPercentage;
+    private double speedOfCarMph;
 
     private Engine engine;
     private SteeringWheel steeringWheel;
@@ -26,20 +26,20 @@ public class Vehicle{
     //Constructor
     public Vehicle(String color, String nameOfCar,String typeOfCar, String fuelType,
                    double weightInPounds, double lengthInFeet, double maxSpeedMph,
-                   double costOfCarInDollars, boolean carIsOn, boolean carIsWorking,
-                   double crashPotentialPercentage,
-                   String nameOfEngine, int numberOfEngineCylinders, int engineTemperature, boolean engineIsWorking,
-                   String nameOfSteeringWheel, boolean steeringWheelIsWorking, String steeringWheelType, double steeringWheelDiameterInCM,
+                   double costOfCarInDollars, boolean carIsWorking,
+                   double crashPotentialPercentage, double speedOfCarMph,
+                   String nameOfEngine, int numberOfEngineCylinders, int engineTemperatureInFahrenheit, boolean engineIsWorking,
+                   String nameOfSteeringWheel, boolean steeringWheelIsWorking, String steeringWheelType, double steeringWheelDiameterInInches,
                    String nameOfBattery, String batteryColor, int batteryCapacityInYears, double batteryVoltageInVolts, boolean batteryIsWorking,
                    String nameOfFuelTank, boolean fuelTankIsWorking, int fuelTankOilInGallons, double fuelTankCapacityInGallons,
-                   String nameOfBrake, int brakeDiscSizeInCM, double brakePadThicknessInMM, boolean brakeIsWorking,
+                   String nameOfBrake, int brakeDiscSizeInInches, double brakePadThicknessInInches, boolean brakeIsWorking,
                    int transmissionNumberOfPlanetGear, int transmissionNumberOfRingGear, int transmissionNumberOfSunGear, int transmissionNumberOfPlanetaryGearSet,
                    double transmissionGearRatio, double transmissionAmountOfTransmissionFluidInQuarts, boolean transmissionValveBodyIsWorking,
                    boolean transmissionSensorIsWorking, boolean transmissionClutchesAndBandsIsWorking, boolean transmissionTorqueConverterIsWorking,
                    boolean transmissionPlanetaryGearSetIsWorking, boolean transmissionSunGearIsWorking, boolean transmissionPlanetGearIsWorking,
                    boolean transmissionRingGearIsWorking, boolean transmissionPumpIsWorking, boolean transmissionIsWorking,
-                   String nameOfGasPedal, boolean gasPedalisWorking, double gasPedalSurfaceAreaInCentimeters,
-                   String nameOfRadiator, double radiatorTemperatureOfRadiatorCelcius, boolean radiatorIsWorking, double radiatorWaterLevelCM
+                   String nameOfGasPedal, boolean gasPedalIsWorking, double gasPedalSurfaceAreaInInches,
+                   String nameOfRadiator, double radiatorTemperatureOfRadiatorFahrenheit, boolean radiatorIsWorking, double radiatorWaterLevelInches
                    )
     {
         this.color = color;
@@ -51,48 +51,91 @@ public class Vehicle{
         this.maxSpeedMph = maxSpeedMph;
         this.costOfCarInDollars = costOfCarInDollars;
         this.carIsWorking = carIsWorking;
-        this.carIsOn = carIsOn;
         if(crashPotentialPercentage > 100){
             this.crashPotentialPercentage=100.0;
         } else if(crashPotentialPercentage < 0){
             this.crashPotentialPercentage=0.0;
         }
         this.crashPotentialPercentage = crashPotentialPercentage;
-        engine = new Engine(nameOfEngine, numberOfEngineCylinders, engineTemperature, engineIsWorking);
-        steeringWheel = new SteeringWheel(nameOfSteeringWheel, steeringWheelIsWorking, steeringWheelType, steeringWheelDiameterInCM);
+
+        this.speedOfCarMph = speedOfCarMph;
+        engine = new Engine(nameOfEngine, numberOfEngineCylinders, engineTemperatureInFahrenheit, engineIsWorking);
+        steeringWheel = new SteeringWheel(nameOfSteeringWheel, steeringWheelIsWorking, steeringWheelType, steeringWheelDiameterInInches);
         battery = new Battery(nameOfBattery, batteryColor, batteryCapacityInYears, batteryVoltageInVolts, batteryIsWorking);
         fuelTank = new FuelTank(nameOfFuelTank, fuelTankIsWorking, fuelTankOilInGallons, fuelTankCapacityInGallons);
-        brake = new Brake(nameOfBrake, brakeDiscSizeInCM, brakePadThicknessInMM, brakeIsWorking);
+        brake = new Brake(nameOfBrake, brakeDiscSizeInInches, brakePadThicknessInInches, brakeIsWorking);
         transmission = new Transmission(transmissionNumberOfPlanetGear,transmissionNumberOfRingGear, transmissionNumberOfSunGear, transmissionNumberOfPlanetaryGearSet,
                 transmissionGearRatio, transmissionAmountOfTransmissionFluidInQuarts, transmissionValveBodyIsWorking, transmissionSensorIsWorking, transmissionClutchesAndBandsIsWorking,
                 transmissionTorqueConverterIsWorking, transmissionPlanetaryGearSetIsWorking, transmissionSunGearIsWorking, transmissionPlanetGearIsWorking,
                 transmissionRingGearIsWorking, transmissionPumpIsWorking, transmissionIsWorking);
-        gasPedal = new GasPedal(nameOfGasPedal, gasPedalisWorking, gasPedalSurfaceAreaInCentimeters);
-        radiator = new Radiator(radiatorTemperatureOfRadiatorCelcius, radiatorIsWorking, radiatorWaterLevelCM, nameOfRadiator);
+        gasPedal = new GasPedal(nameOfGasPedal, gasPedalIsWorking, gasPedalSurfaceAreaInInches);
+        radiator = new Radiator(radiatorTemperatureOfRadiatorFahrenheit, radiatorIsWorking, radiatorWaterLevelInches, nameOfRadiator);
+    }
+
+    public Vehicle(String color, String nameOfCar, String typeOfCar, String fuelType,
+                   double weightInPounds, double lengthInFeet, double maxSpeedMph,
+                   double costOfCarInDollars, boolean carIsWorking,
+                   double crashPotentialPercentage, double speedOfCarMph,
+                   int numberOfEngineCylinders, int engineTemperatureInFahrenheit,
+                    String steeringWheelType, double steeringWheelDiameterInInches,
+                   String batteryColor, int batteryCapacityInYears, double batteryVoltageInVolts,
+                   int fuelTankOilInGallons, int fuelTankCapacityInGallons,
+                   int brakeDiscSizeInInches, double brakePadThicknessInInches,
+                   int transmissionNumberOfPlanetGear, int transmissionNumberOfRingGear, int transmissionNumberOfSunGear, int transmissionNumberOfPlanetaryGearSet,
+                   double transmissionGearRatio, double transmissionAmountOfTransmissionFluidInQuarts,
+                   double gasPedalSurfaceAreaInInches,
+                   double radiatorTemperatureOfRadiatorFahrenheit, double radiatorWaterLevelInches
+    )
+    {
+        this.color = color;
+        this.nameOfCar = nameOfCar;
+        this.typeOfCar = typeOfCar;
+        this.fuelType = fuelType;
+        this.weightInPounds = weightInPounds;
+        this.lengthInFeet = lengthInFeet;
+        this.maxSpeedMph = maxSpeedMph;
+        this.costOfCarInDollars = costOfCarInDollars;
+        this.carIsWorking = carIsWorking;
+        if(crashPotentialPercentage > 100){
+            this.crashPotentialPercentage=100.0;
+        } else if(crashPotentialPercentage < 0){
+            this.crashPotentialPercentage=0.0;
+        }
+        this.crashPotentialPercentage = crashPotentialPercentage;
+
+        this.speedOfCarMph = speedOfCarMph;
+        engine = new Engine("engine", numberOfEngineCylinders, engineTemperatureInFahrenheit, true);
+        steeringWheel = new SteeringWheel("steering wheel", true, steeringWheelType, steeringWheelDiameterInInches);
+        battery = new Battery("battery", batteryColor, batteryCapacityInYears, batteryVoltageInVolts, true);
+        fuelTank = new FuelTank("fuel tank", true, fuelTankOilInGallons, fuelTankCapacityInGallons);
+        brake = new Brake("brake", brakeDiscSizeInInches, brakePadThicknessInInches, true);
+        transmission = new Transmission(transmissionNumberOfPlanetGear,transmissionNumberOfRingGear, transmissionNumberOfSunGear, transmissionNumberOfPlanetaryGearSet,
+                transmissionGearRatio, transmissionAmountOfTransmissionFluidInQuarts, true, true, true,
+                true, true, true, true,
+                true, true, true);
+        gasPedal = new GasPedal("gas pedal", true, gasPedalSurfaceAreaInInches);
+        radiator = new Radiator(radiatorTemperatureOfRadiatorFahrenheit, true, radiatorWaterLevelInches, "radiator");
     }
 
     //Methods
 
     public String start()
     {
-        if (carIsWorking){
+        if (carIsWorking && getEngine().getIsWorking() && getBattery().getIsWorking()
+        && getFuelTank().getFuelTankCapacityInGallons() > 0 && getTransmission().getAmountOfTransmissionFluidInQuarts() > 0 && getRadiator().getIsWorking())
+        {
             carIsOn = true;
             return "car is on!";
         }else{
+            carIsOn = false;
             return "The car is not working.";
         }
 
     }
+
     public String toString()
     {
-        String message="The "+getNameOfCar()+ " is "+ getTypeOfcar +".\n";
-        message+="The color of the car is "+getColor+".\n";
-        message+="The fuel type of the car is "+getFuelType+".\n";
-        message+="The length of the car is "+getLengthInFeet+ " in feet.\n";
-        message+="The max speed of the car is "+getMaxSpeedMph+ " in mph.\n";
-        message+="The cost of the car is "+getCostOfCarInDollars+"in dollars.\n";
-        message+="The weight of the car is "+getWeightInPounds+"in pounds.\n";
-        message+="The crash potential percentage of the car is "+getCrashPotentialPercentage+".\n";
+        String message= description();
         if(carIsWorking){
             message += "The car is working.\n";
         }else{
@@ -103,125 +146,117 @@ public class Vehicle{
         }else{
             message += "The car is not on.\n";
         }
-
-
+        if(getEngine().getIsWorking()){
+            message+="The engine is working.\n";
+        }else{
+            message += "The engine is not working.\n";
+        }
+        if(getSteeringWheel().getIsWorking()){
+            message+="The steering wheel is working.\n";
+        }else{
+            message += "The steering wheel is not working.\n";
+        }
+        if(getBattery().getIsWorking()){
+            message+="The car is on.\n";
+        }else{
+            message += "The car is not on.\n";
+        }
+        if(getFuelTank().getIsWorking()){
+            message+="The car is on.\n";
+        }else{
+            message += "The car is not on.\n";
+        }
+        if(getBrake().getIsWorking()){
+            message+="The car is on.\n";
+        }else{
+            message += "The car is not on.\n";
+        }
+        if(getTransmission().getIsWorking()){
+            message+="The car is on.\n";
+        }else{
+            message += "The car is not on.\n";
+        }
+        if(getGasPedal().getIsWorking()){
+            message+="The car is on.\n";
+        }else{
+            message += "The car is not on.\n";
+        }
+        if(getRadiator().getIsWorking()){
+            message+="The car is on.\n";
+        }else{
+            message += "The car is not on.\n";
+        }
         return message;
     }
 
-    /*
-    private Door[] doors;
-      private Tire[] tires;
-      private Engine engine;
-      private SteeringWheel steeringWheel;
-      private Battery battery;
-      private FuelTank fuelTank;
-      private Brake brake;
-      private Transmission transmission;
-      private WheelAxle[] wheelAxles;
-      private GasPedal gasPedal;
-      private Seat[] seats;
-      private Radiator radiator;
-      */
-    public String fixAll(){
-        for(Door d:doors){
-            d.fix();
-        }
-        for(Tire t:tires){
-            t.fix();
-        }
-        for(WheelAxle w:wheelAxles){
-            w.fix();
-        }
-        for(Seat s:seats){
-            s.fix();
-        }
-        engine.fix();
-        steeringWheel.fix();
-        battery.fix();
-        fuelTank.fix();
-        brake.fix();
-        transmission.fix();
-        gasPedal.fix();
-        radiator.fix();
+    public String description(){
+        String message="The "+getNameOfCar()+ " is "+ typeOfCar +".\n";
+        message+= "The color of the car is "+ color+".\n";
+        message+="The fuel type of the car is "+fuelType+".\n";
+        message+="The length of the car is "+lengthInFeet+ " feet.\n";
+        message+="The max speed of the car is "+ maxSpeedMph + " in mph.\n";
+        message+="The cost of the car is "+costOfCarInDollars+"in dollars.\n";
+        message+="The weight of the car is "+ weightInPounds + "in pounds.\n";
+        message+="The crash potential percentage of the car is "+crashPotentialPercentage+".\n";
+        message+="The speed of the car is " + speedOfCarMph +".\n";
+        return message;
+    }
+
+    public String fix(){
+        System.out.println(engine.fix());
+        System.out.println(steeringWheel.fix());
+        System.out.println(battery.fix());
+        System.out.println(fuelTank.fix());
+        System.out.println(brake.fix());
+        System.out.println(transmission.fix());
+        System.out.println(gasPedal.fix());
+        System.out.println(radiator.fix());
         carIsWorking=true;
-        return "This "+nameOfCar+" is now repaired";
-    }
-    public void update(){
-        if(engine.getIsWorking()){
-            carIsWorking=false;
-        }
-        if(!carIsWorking){
-            for(Door d:doors){
-                d.damage();
-            }
-            for(Tire t:tires){
-                t.damage();
-            }
-            for(WheelAxle w:wheelAxles){
-                w.damage();
-            }
-            for(Seat s:seats){
-                s.damage();
-            }
-            engine.damage();
-            steeringWheel.damage();
-            battery.damage();
-            fuelTank.damage();
-            brake.damage();
-            transmission.damage();
-            gasPedal.damage();
-            radiator.damage();
-        }
-    }
-    public String damageAll(){
-
-        for(Door d:doors){
-            d.damage();
-        }
-        for(Tire t:tires){
-            t.damage();
-        }
-        for(WheelAxle w:wheelAxles){
-            w.damage();
-        }
-        for(Seat s:seats){
-            s.damage();
-        }
-        engine.damage();
-        steeringWheel.damage();
-        battery.damage();
-        fuelTank.damage();
-        brake.damage();
-        transmission.damage();
-        gasPedal.damage();
-        radiator.damage();
-        carIsWorking=false;
-        return "This "+nameOfCar+" is broken";
-
+        return "This " + nameOfCar +" is now working and every part repaired";
     }
 
-    public String drive(double mph){
+    public boolean drive(){
+        speedOfCarMph = 60;
+        start();
         String message = "";
-        update();
         if(!carIsWorking){
-            return "This "+ nameOfCar +" is not working and you cannot drive it";
+            System.out.println("This " + nameOfCar +" is not working and you cannot drive it");
+            return false;
         }
-        if(!carIsOn){
-            return "This "+nameOfCar+" needs to be on to drive.";
+        if(!carIsOn || !(getSteeringWheel().getIsWorking())){
+            System.out.println("This "+nameOfCar+" cannot drive because of certain part failures");
+            return false;
+        }
+
+
+        return true;
+    }
+
+    public boolean drive(double mph){
+        speedOfCarMph = mph;
+        String message = "";
+        if(!carIsWorking){
+            System.out.println("This "+ nameOfCar +" is not working and you cannot drive it");
+            return false;
+        }
+        if(!carIsOn || !(getSteeringWheel().getIsWorking())){
+            System.out.println("This "+nameOfCar+" cannot drive because of certain part failures");
+            return false;
         }else if (mph > maxSpeedMph) {
-            return "You attempt to drive the car at a high speed. Crash potential increased. "
+            System.out.println("You attempt to drive the car at a high speed. Crash potential increased. ");
+            return false;
         }
 
 
-        return message;
+        return true;
     }
 
-    public String action1(){
-        return "";
+    public boolean action1(){
+        return true;
     }
 
-    public String action2(){
-        return "";
+    public boolean action2(){
+        return true;
     }
 
 
@@ -245,13 +280,13 @@ public class Vehicle{
     {
         this.weightInPounds=weightInPounds;
     }
-    public void setLengthInFeet(String lengthInFeet)
+    public void setLengthInFeet(double lengthInFeet)
     {
-        this.lengthInFeet=lengthInFeet;
+        this.lengthInFeet = lengthInFeet;
     }
     public void setMaxSpeedMph(double maxSpeedMph)
     {
-        this.maxSpeedMph=maxSpeedMph;
+        this.maxSpeedMph = maxSpeedMph;
     }
     public void setCostOfCarInDollars(double costOfCarInDollars)
     {
@@ -271,6 +306,10 @@ public class Vehicle{
     }
     public void setTypeOfCar(String typeOfCar){
         this.typeOfCar=typeOfCar;
+    }
+
+    public void setSpeedOfCarMph(double speedOfCarMph){
+        this.speedOfCarMph = speedOfCarMph;
     }
 
 //--------------------getters---------------------
@@ -308,9 +347,9 @@ public class Vehicle{
     {
         return carIsOn;
     }
-    public boolean getCostOfCarIsWorking()
+    public boolean getCarIsWorking()
     {
-        return carIsWoking;
+        return carIsWorking;
     }
     public double getCrashPotentialPercentage()
     {
@@ -319,7 +358,13 @@ public class Vehicle{
     public String getTypeOfCar(){
         return typeOfCar;
     }
+
+    public double getSpeedOfCarMph(){
+        return speedOfCarMph;
+    }
+
     //getters (parts)
+
     public Engine getEngine(){
         return this.engine;
     }
@@ -336,22 +381,16 @@ public class Vehicle{
     public Brake getBrake(){
         return this.brake;
     }
-    public Transmission getTransmission(){
+    public Transmission getTransmission() {
         return this.transmission;
-    }
-    public Tires[] getTires(){
-        return this.tires;
     }
 
     public Radiator getRadiator(){
-        return this.radiatior;
+        return this.radiator;
     }
 
     public GasPedal getGasPedal(){
         return this.gasPedal;
     }
 
-    public WheelAxle[] getWheelAxles(){
-        return wheelAxles;
-    }
 }
