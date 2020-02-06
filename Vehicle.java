@@ -8,7 +8,7 @@ public class Vehicle{
     private double lengthInFeet;
     private double maxSpeedMph;
     private double costOfCarInDollars;
-    private boolean carIsOn;
+    private boolean carIsOn = false;
     private boolean carIsWorking;
     private double crashPotentialPercentage;
     private double speedOfCarMph;
@@ -31,7 +31,7 @@ public class Vehicle{
                    String nameOfEngine, int numberOfEngineCylinders, int engineTemperatureInFahrenheit, boolean engineIsWorking,
                    String nameOfSteeringWheel, boolean steeringWheelIsWorking, String steeringWheelType, double steeringWheelDiameterInInches,
                    String nameOfBattery, String batteryColor, int batteryCapacityInYears, double batteryVoltageInVolts, boolean batteryIsWorking,
-                   String nameOfFuelTank, boolean fuelTankIsWorking, int fuelTankOilInGallons, double fuelTankCapacityInGallons,
+                   String nameOfFuelTank, boolean fuelTankIsWorking, int fuelTankOilInGallons, double fuelTankCapacity,
                    String nameOfBrake, int brakeDiscSizeInInches, double brakePadThicknessInInches, boolean brakeIsWorking,
                    int transmissionNumberOfPlanetGear, int transmissionNumberOfRingGear, int transmissionNumberOfSunGear, int transmissionNumberOfPlanetaryGearSet,
                    double transmissionGearRatio, double transmissionAmountOfTransmissionFluidInQuarts, boolean transmissionValveBodyIsWorking,
@@ -62,7 +62,7 @@ public class Vehicle{
         engine = new Engine(nameOfEngine, numberOfEngineCylinders, engineTemperatureInFahrenheit, engineIsWorking);
         steeringWheel = new SteeringWheel(nameOfSteeringWheel, steeringWheelIsWorking, steeringWheelType, steeringWheelDiameterInInches);
         battery = new Battery(nameOfBattery, batteryColor, batteryCapacityInYears, batteryVoltageInVolts, batteryIsWorking);
-        fuelTank = new FuelTank(nameOfFuelTank, fuelTankIsWorking, fuelTankOilInGallons, fuelTankCapacityInGallons);
+        fuelTank = new FuelTank(nameOfFuelTank, fuelTankIsWorking, fuelTankOilInGallons, fuelTankCapacity);
         brake = new Brake(nameOfBrake, brakeDiscSizeInInches, brakePadThicknessInInches, brakeIsWorking);
         transmission = new Transmission(transmissionNumberOfPlanetGear,transmissionNumberOfRingGear, transmissionNumberOfSunGear, transmissionNumberOfPlanetaryGearSet,
                 transmissionGearRatio, transmissionAmountOfTransmissionFluidInQuarts, transmissionValveBodyIsWorking, transmissionSensorIsWorking, transmissionClutchesAndBandsIsWorking,
@@ -79,7 +79,7 @@ public class Vehicle{
                    int numberOfEngineCylinders, int engineTemperatureInFahrenheit,
                     String steeringWheelType, double steeringWheelDiameterInInches,
                    String batteryColor, int batteryCapacityInYears, double batteryVoltageInVolts,
-                   int fuelTankOilInGallons, int fuelTankCapacityInGallons,
+                   int fuelTankOilInGallons, int fuelTankCapacity,
                    int brakeDiscSizeInInches, double brakePadThicknessInInches,
                    int transmissionNumberOfPlanetGear, int transmissionNumberOfRingGear, int transmissionNumberOfSunGear, int transmissionNumberOfPlanetaryGearSet,
                    double transmissionGearRatio, double transmissionAmountOfTransmissionFluidInQuarts,
@@ -107,7 +107,7 @@ public class Vehicle{
         engine = new Engine("engine", numberOfEngineCylinders, engineTemperatureInFahrenheit, true);
         steeringWheel = new SteeringWheel("steering wheel", true, steeringWheelType, steeringWheelDiameterInInches);
         battery = new Battery("battery", batteryColor, batteryCapacityInYears, batteryVoltageInVolts, true);
-        fuelTank = new FuelTank("fuel tank", true, fuelTankOilInGallons, fuelTankCapacityInGallons);
+        fuelTank = new FuelTank("fuel tank", true, fuelTankOilInGallons, fuelTankCapacity);
         brake = new Brake("brake", brakeDiscSizeInInches, brakePadThicknessInInches, true);
         transmission = new Transmission(transmissionNumberOfPlanetGear,transmissionNumberOfRingGear, transmissionNumberOfSunGear, transmissionNumberOfPlanetaryGearSet,
                 transmissionGearRatio, transmissionAmountOfTransmissionFluidInQuarts, true, true, true,
@@ -122,7 +122,7 @@ public class Vehicle{
     public String start()
     {
         if (carIsWorking && getEngine().getIsWorking() && getBattery().getIsWorking()
-        && getFuelTank().getFuelTankCapacityInGallons() > 0 && getTransmission().getAmountOfTransmissionFluidInQuarts() > 0 && getRadiator().getIsWorking())
+        && getFuelTank().getFuelTankCapacity() > 0 && getTransmission().getAmountOfTransmissionFluidInQuarts() > 0 && getRadiator().getIsWorking())
         {
             carIsOn = true;
             return "car is on!";
@@ -133,6 +133,7 @@ public class Vehicle{
 
     }
 
+    @Override
     public String toString()
     {
         String message= description();
@@ -157,34 +158,34 @@ public class Vehicle{
             message += "The steering wheel is not working.\n";
         }
         if(getBattery().getIsWorking()){
-            message+="The car is on.\n";
+            message+="The battery is working.\n";
         }else{
-            message += "The car is not on.\n";
+            message += "The battery is not working.\n";
         }
         if(getFuelTank().getIsWorking()){
-            message+="The car is on.\n";
+            message+="The car has fuel.\n";
         }else{
-            message += "The car is not on.\n";
+            message += "The car does not have fuel.\n";
         }
         if(getBrake().getIsWorking()){
-            message+="The car is on.\n";
+            message+="The brake is working.\n";
         }else{
-            message += "The car is not on.\n";
+            message += "The brake is not working.\n";
         }
         if(getTransmission().getIsWorking()){
-            message+="The car is on.\n";
+            message+="The transmission is working.\n";
         }else{
-            message += "The car is not on.\n";
+            message += "The transmission is not working.\n";
         }
         if(getGasPedal().getIsWorking()){
-            message+="The car is on.\n";
+            message+="The gas pedal is working.\n";
         }else{
-            message += "The car is not on.\n";
+            message += "The gas pedal is not working.\n";
         }
         if(getRadiator().getIsWorking()){
-            message+="The car is on.\n";
+            message+="The radiator is working.\n";
         }else{
-            message += "The car is not on.\n";
+            message += "The radiator is not working.\n";
         }
         return message;
     }
@@ -195,8 +196,8 @@ public class Vehicle{
         message+="The fuel type of the car is "+fuelType+".\n";
         message+="The length of the car is "+lengthInFeet+ " feet.\n";
         message+="The max speed of the car is "+ maxSpeedMph + " in mph.\n";
-        message+="The cost of the car is "+costOfCarInDollars+"in dollars.\n";
-        message+="The weight of the car is "+ weightInPounds + "in pounds.\n";
+        message+="The cost of the car is "+costOfCarInDollars+" in dollars.\n";
+        message+="The weight of the car is "+ weightInPounds + " in pounds.\n";
         message+="The crash potential percentage of the car is "+crashPotentialPercentage+".\n";
         message+="The speed of the car is " + speedOfCarMph +".\n";
         return message;
@@ -212,7 +213,7 @@ public class Vehicle{
         System.out.println(gasPedal.fix());
         System.out.println(radiator.fix());
         carIsWorking=true;
-        return "This " + nameOfCar +" is now working and every part repaired";
+        return "This " + nameOfCar +" is now working and every part repaired the total cost is: $1200.";
     }
 
     public boolean drive(){
@@ -220,15 +221,13 @@ public class Vehicle{
         start();
         String message = "";
         if(!carIsWorking){
-            System.out.println("This " + nameOfCar +" is not working and you cannot drive it");
+            System.out.println("This " + nameOfCar +" is not working and you cannot drive it.");
             return false;
         }
         if(!carIsOn || !(getSteeringWheel().getIsWorking())){
-            System.out.println("This "+nameOfCar+" cannot drive because of certain part failures");
+            System.out.println("This "+nameOfCar+" cannot drive because of certain part failures.");
             return false;
         }
-
-
         return true;
     }
 
@@ -236,11 +235,11 @@ public class Vehicle{
         speedOfCarMph = mph;
         String message = "";
         if(!carIsWorking){
-            System.out.println("This "+ nameOfCar +" is not working and you cannot drive it");
+            System.out.println("This "+ nameOfCar +" is not working and you cannot drive it.");
             return false;
         }
         if(!carIsOn || !(getSteeringWheel().getIsWorking())){
-            System.out.println("This "+nameOfCar+" cannot drive because of certain part failures");
+            System.out.println("This "+nameOfCar+" cannot drive because of certain part failures.");
             return false;
         }else if (mph > maxSpeedMph) {
             System.out.println("You attempt to drive the car at a high speed. Crash potential increased. ");

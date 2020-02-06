@@ -1,20 +1,20 @@
 public class Wheel extends CarComponent
 {
-    private int tirePressureInKPA;
-    private int rimDiameterInCm;
+    private int tirePressureInPSI;
+    private int rimDiameterInInches;
 
-    public Wheel(int tirePressureInKPA, int rimDiameterInCm)
+    public Wheel(int tirePressureInPSI, int rimDiameterInInches)
     {
         super("wheel", true);
-        this.tirePressureInKPA = tirePressureInKPA;
-        this.rimDiameterInCm = rimDiameterInCm;
+        this.tirePressureInPSI = tirePressureInPSI;
+        this.rimDiameterInInches = rimDiameterInInches;
     }
 
-    public Wheel(String nameOfComponent, int tirePressureInKPA, int rimDiameterInCm, boolean isWorking)
+    public Wheel(String nameOfComponent, int tirePressureInPSI, int rimDiameterInInches, boolean isWorking)
     {
         super(nameOfComponent, isWorking);
-        this.tirePressureInKPA = tirePressureInKPA;
-        this.rimDiameterInCm = rimDiameterInCm;
+        this.tirePressureInPSI = tirePressureInPSI;
+        this.rimDiameterInInches = rimDiameterInInches;
     }
 
     @Override
@@ -34,9 +34,10 @@ public class Wheel extends CarComponent
     }
 
     @Override
-    public String action1()
+    public boolean action1()
     {
-        return rotate();
+         rotate();
+         return getIsWorking();
     }
 
     public String rotate()
@@ -76,24 +77,125 @@ public class Wheel extends CarComponent
         }
     }
 
-    public int getTirePressureInKPA()
+    public int getTirePressureInPSI()
     {
-        return this.tirePressureInKPA;
+        return this.tirePressureInPSI;
     }
 
-    public void setTirePressureInKPA(int tirePressureInKPA)
+    public void setTirePressureInPSI(int tirePressureInPSI)
     {
-        this.tirePressureInKPA = tirePressureInKPA;
+        this.tirePressureInPSI = tirePressureInPSI;
     }
 
-    public int getRimDiameterInCm()
+    public int getRimDiameterInInches()
     {
-        return this.rimDiameterInCm;
+        return this.rimDiameterInInches;
     }
 
-    public void setRimDiameterInCm(int rimDiameterInCm)
+    public void setRimDiameterInInches(int rimDiameterInInches)
     {
-        this.rimDiameterInCm = rimDiameterInCm;
+        this.rimDiameterInInches = rimDiameterInInches;
     }
 }
+
+//OLD CODE BELOW
+
+// public class Wheel extends CarComponent
+// {
+//     private int tirePressureInKPA;
+//     private int rimDiameterInCm;
+
+//     public Wheel(int tirePressureInKPA, int rimDiameterInCm)
+//     {
+//         super("wheel", true);
+//         this.tirePressureInKPA = tirePressureInKPA;
+//         this.rimDiameterInCm = rimDiameterInCm;
+//     }
+
+//     public Wheel(String nameOfComponent, int tirePressureInKPA, int rimDiameterInCm, boolean isWorking)
+//     {
+//         super(nameOfComponent, isWorking);
+//         this.tirePressureInKPA = tirePressureInKPA;
+//         this.rimDiameterInCm = rimDiameterInCm;
+//     }
+
+//     @Override
+//     public String toString()
+//     {
+//         String message = "";
+//         message += "The " + getNameOfComponent() + " is ";
+//         if(getIsWorking())
+//         {
+//             message += "rotating.";
+//         }
+//         else
+//         {
+//             message += "not rotating.";
+//         }
+//         return message;
+//     }
+
+//     @Override
+//     public String action1()
+//     {
+//         return rotate();
+//     }
+
+//     public String rotate()
+//     {
+//         if (getIsWorking())
+//         {           
+//             if (((int) (Math.random() * 100 + 1) > 98))
+//             {
+//                 return damage() + "The " + getNameOfComponent() + " can not rotate."; 
+//             }
+//             return "The " + getNameOfComponent() + " rotates.";             
+//         }
+//         else
+//         {
+//             return "The " + getNameOfComponent() + " does not rotate.";
+//         }
+//     }       
+
+//     @Override
+//     public String damage()
+//     {
+//         setIsWorking(false);
+//         return "The " + getNameOfComponent() + " is broken and cannot rotate.";
+//     }
+
+//     @Override
+//     public String fix()
+//     {
+//         if (getIsWorking())
+//         {
+//             return "The " + getNameOfComponent() + " was already fine.";
+//         }
+//         else
+//         {
+//             setIsWorking(true);
+//             return "The " + getNameOfComponent() + " is now rotating.";
+//         }
+//     }
+
+//     public int getTirePressureInKPA()
+//     {
+//         return this.tirePressureInKPA;
+//     }
+
+//     public void setTirePressureInKPA(int tirePressureInKPA)
+//     {
+//         this.tirePressureInKPA = tirePressureInKPA;
+//     }
+
+//     public int getRimDiameterInCm()
+//     {
+//         return this.rimDiameterInCm;
+//     }
+
+//     public void setRimDiameterInCm(int rimDiameterInCm)
+//     {
+//         this.rimDiameterInCm = rimDiameterInCm;
+//     }
+// }
 

@@ -2,16 +2,16 @@
 public class Axle extends CarComponent
 {
    // instance variables
-   private double thicknessInCm;
-   private double lengthInCm; 
+   private double thicknessInInches;
+   private double lengthInInches; 
    private boolean isWorking;
    // constructors
    
-   public Axle(String nameOfComponent, boolean isWorking, double thicknessInCm, double lengthInCm)
+   public Axle(String nameOfComponent, boolean isWorking, double thicknessInInches, double lengthInInches)
    {
      super(nameOfComponent, isWorking);
-     this.thicknessInCm = thicknessInCm;
-     this.lengthInCm = lengthInCm;
+     this.thicknessInInches = thicknessInInches;
+     this.lengthInInches = lengthInInches;
      //this.isWorking = isWorking;  
    }
     
@@ -51,15 +51,17 @@ public class Axle extends CarComponent
    }
    
    @Override
-   public String action1()
+   public boolean action1()
    {
-       return spin();
+       spin();
+       return getIsWorking();
    }
    
    @Override
-   public String action2()
+   public boolean action2()
    {
-       return transferPower();
+        transferPower();
+        return getIsWorking();
    }
    
    @Override
@@ -86,30 +88,30 @@ public class Axle extends CarComponent
    {
        String message = "";
        message += super.toString();
-       message += "The thickness in cm is " + getThicknessInCm() + ". \n";
-       message += "The length in cm is " + getLengthInCm() + ". \n"; 
+       message += "The thickness in cm is " + getThicknessInInches() + ". \n";
+       message += "The length in cm is " + getLengthInInches() + ". \n"; 
        return message;
    } 
    
    // getters and setters
-   public void setThicknessInCm(double thicknessInCm)
+   public void setThicknessInInches(double thicknessInInches)
    {
-       this.thicknessInCm = thicknessInCm;
+       this.thicknessInInches = thicknessInInches;
    }
    
-   public double getThicknessInCm()
+   public double getThicknessInInches()
    {
-       return thicknessInCm; 
+       return thicknessInInches; 
    }
    
-   public void setLengthInCm(double lengthInCm)
+   public void setLengthInInches(double lengthInInches)
    {
-       this.lengthInCm = lengthInCm;
+       this.lengthInInches = lengthInInches;
    }
    
-   public double getLengthInCm()
+   public double getLengthInInches()
    {
-       return lengthInCm; 
+       return lengthInInches; 
    }
   
    public void setIsWorking(boolean isWorking)
@@ -123,3 +125,130 @@ public class Axle extends CarComponent
    }
    
 }
+
+//OLD CODE BELOW
+
+// public class Axle extends CarComponent
+// {
+//    // instance variables
+//    private double thicknessInCm;
+//    private double lengthInCm; 
+//    private boolean isWorking;
+//    // constructors
+   
+//    public Axle(String nameOfComponent, boolean isWorking, double thicknessInCm, double lengthInCm)
+//    {
+//      super(nameOfComponent, isWorking);
+//      this.thicknessInCm = thicknessInCm;
+//      this.lengthInCm = lengthInCm;
+//      //this.isWorking = isWorking;  
+//    }
+    
+//    // methods
+//    public String spin()
+//    {
+//        if (getIsWorking())
+//        {
+//            if (((int)(Math.random() * 100) + 1) > 10)
+//            {
+//                damage();
+//                return "The axle cannot spin."; 
+//            }
+//            return "The axle spins.";
+//        }
+//        else
+//        {
+//            return "The axle cannot spin."; 
+//        }
+//    }
+   
+//    public String transferPower()
+//    {
+//        if (getIsWorking())
+//        {
+//            if (((int)(Math.random() * 100) + 1) > 10)
+//            {
+//                damage();
+//                return "The axle cannot transfer power."; 
+//            }
+//            return "The axle transfers power.";
+//        }
+//        else
+//        {
+//            return "The axle cannot transfer power."; 
+//        }
+//    }
+   
+//    @Override
+//    public String action1()
+//    {
+//        return spin();
+//    }
+   
+//    @Override
+//    public String action2()
+//    {
+//        return transferPower();
+//    }
+   
+//    @Override
+//    public String damage()
+//    {
+//        setIsWorking(false);
+//        return "The axle is damaged.";
+//    }
+   
+//    @Override
+//    public String fix()
+//    {
+//        if (getIsWorking())
+//            return "The axle is already working.";
+//        else
+//        {
+//            setIsWorking(true);
+//            return "The axle is fixed.";
+//        }
+//    }
+   
+//    @Override
+//    public String toString()
+//    {
+//        String message = "";
+//        message += super.toString();
+//        message += "The thickness in cm is " + getThicknessInCm() + ". \n";
+//        message += "The length in cm is " + getLengthInCm() + ". \n"; 
+//        return message;
+//    } 
+   
+//    // getters and setters
+//    public void setThicknessInCm(double thicknessInCm)
+//    {
+//        this.thicknessInCm = thicknessInCm;
+//    }
+   
+//    public double getThicknessInCm()
+//    {
+//        return thicknessInCm; 
+//    }
+   
+//    public void setLengthInCm(double lengthInCm)
+//    {
+//        this.lengthInCm = lengthInCm;
+//    }
+   
+//    public double getLengthInCm()
+//    {
+//        return lengthInCm; 
+//    }
+  
+//    public void setIsWorking(boolean isWorking)
+//    {
+//        this.isWorking = isWorking;
+//    }
+   
+//    public boolean getIsWorking()
+//    {
+//        return isWorking; 
+//    }
+   
+// }
