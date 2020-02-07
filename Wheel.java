@@ -34,17 +34,17 @@ public class Wheel extends CarComponent
     }
 
     @Override
-    public boolean action1()
+    public String action1()
     {
-         rotate();
-         return getIsWorking();
+         
+         return rotate();
     }
 
     public String rotate()
     {
         if (getIsWorking())
         {           
-            if (((int) (Math.random() * 100 + 1) > 98))
+            if (!super.conditionalCheck())
             {
                 return damage() + "The " + getNameOfComponent() + " can not rotate."; 
             }

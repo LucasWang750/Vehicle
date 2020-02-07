@@ -7,12 +7,19 @@
  */
 public class Radiator extends CarComponent
 {
-   private double temperatureOfRadiatorCelcius;  
+   private double temperatureOfRadiatorFahrenheit;  
    private double waterLevelInches;
 
-   public Radiator(double temperatureOfRadiatorCelcius, boolean isWorking, double waterLevelInches, String nameOfComponent){
+   public Radiator(double temperatureOfRadiatorFahrenheit, boolean isWorking, double waterLevelInches, String nameOfComponent){
        super(nameOfComponent, isWorking);
-       this.temperatureOfRadiatorCelcius = temperatureOfRadiatorCelcius;
+       this.temperatureOfRadiatorFahrenheit = temperatureOfRadiatorFahrenheit;
+       this.waterLevelInches = waterLevelInches;
+       
+    }
+    
+   public Radiator(double temperatureOfRadiatorFahrenheit, double waterLevelInches){
+       super("Radiator", true);
+       this.temperatureOfRadiatorFahrenheit = temperatureOfRadiatorFahrenheit;
        this.waterLevelInches = waterLevelInches;
        
     }
@@ -31,62 +38,60 @@ public class Radiator extends CarComponent
     
    public String coolEngine(){
        if (getIsWorking()){
-           if(((int) (Math.random()*100)+1)>90){
+           if(!super.conditionalCheck()){
                this.setIsWorking(false);
-           return "The radiator could not cool the engine" + ".\n";
+           return "The radiator could not cool the engine";
            }
-           return "the radiator cooled the engine" + ".\n";
+           return "the radiator cooled the engine";
      }
      else{
-         return "the radiator could not cool the engine" + ".\n";
+         return "the radiator could not cool the engine";
         }
      }
      
    public String heatEngine(){
        if (getIsWorking()){
-           if(((int) (Math.random()*100)+1)>90){
+           if(!super.conditionalCheck()){
                this.setIsWorking(false);
-           return "The radiator could not heat the engine" + ".\n";
+           return "The radiator could not heat the engine";
            }
-           return "the radiator heated the engine" + ".\n";
+           return "the radiator heated the engine";
      }
      else{
-         return "the radiator could not heat the engine" + ".\n";
+         return "the radiator could not heat the engine";
         }
      }
      
    @Override
-   public boolean action1(){
-       coolEngine();
-       return getIsWorking();
+   public String action1(){
+       
+       return coolEngine();
     }
     
    @Override
-   public boolean action2(){
-       heatEngine();
-       return getIsWorking();
+   public String action2(){
+       
+       return heatEngine();
     }
     
    @Override
    public String toString() {
-     String message = "";
+     
      if(getIsWorking()) {
-	message+= "The " + getNameOfComponent() + " is working" + ".\n";
+	return "The " + getNameOfComponent() + " is working";
 	}
 	else {
-	message+= "The " + getNameOfComponent() + " is not working" + ".\n"; 
+	return "The " + getNameOfComponent() + " is not working"; 
 	}
-	message+= "The water level in Inches of the " + getNameOfComponent() + " is " + getWaterLevelInches() + ".\n";
-	message+= "The temperature in celcius of the " + getNameOfComponent() + " is " + getTemperatureOfRadiatorCelcius() + ".\n";
-	return message;
+	
    }
    
-   public void setRadiatorTemperatureInCelcius (double temperatureOfRadiatorCelcius ){
-        this.temperatureOfRadiatorCelcius  = temperatureOfRadiatorCelcius ; 
+   public void setRadiatorTemperatureInF (double temperatureOfRadiatorF ){
+        this.temperatureOfRadiatorFahrenheit  = temperatureOfRadiatorF ; 
     }
 
-   public double getTemperatureOfRadiatorCelcius (){
-        return this.temperatureOfRadiatorCelcius ;
+   public double getTemperatureOfRadiatorFahrenheit (){
+        return this.temperatureOfRadiatorFahrenheit ;
     }
 
    public void setWaterLevelInches(double waterLevelInches){

@@ -2,26 +2,34 @@
 public class GasPedal extends CarComponent
 {
     private double surfaceAreaInInchesSquared;
+    public GasPedal(String nameOfComponent, boolean isWorking, double surfaceAreaInInchesSquared, double chanceOfFailure)
+    {
+        super(nameOfComponent, isWorking, chanceOfFailure);
+        this.surfaceAreaInInchesSquared = surfaceAreaInInchesSquared;
+    }
     public GasPedal(String nameOfComponent, boolean isWorking, double surfaceAreaInInchesSquared)
     {
         super(nameOfComponent, isWorking);
         this.surfaceAreaInInchesSquared = surfaceAreaInInchesSquared;
     }
-    
-    public void setSurfaceAreaInInchesSquared(double surfaceAreaInInchesSquared)
-    {
-        this.surfaceAreaInInchesSquared = surfaceAreaInInchesSquared;
+    @Override
+	public String toString() {
+	String message = getNameOfComponent() + "is ";
+	if(getIsWorking()) 
+	{
+	    message += "workng";
+	}
+	else 
+	{
+	    message+= "not working"; 
+	}
+	message += "\n    " + "The surface area of " + getNameOfComponent() + " is " + getSurfaceAreaInInchesSquared() + " inches squared";
+	return message;
     }
-    
-    public double getSurfaceAreaInInchesSquared()
-    {
-        return surfaceAreaInInchesSquared;
-    }
-    
     public String accelerate()
     {
         if(getIsWorking()){
-            if((int)((Math.random()*100))+1>90)
+            if(!super.conditionalCheck())
             {
                 setIsWorking(false);
                 return getNameOfComponent() + " does not accelerate.";
@@ -33,11 +41,10 @@ public class GasPedal extends CarComponent
         }
         return getNameOfComponent() + " does not accelerate.";
     }
-    
     public String decelerate()
     {
         if(getIsWorking()){
-            if((int)((Math.random()*100))+1>90)
+            if(!super.conditionalCheck())
             {
                 setIsWorking(false);
                 return getNameOfComponent() + " does not decelerate.";
@@ -49,115 +56,39 @@ public class GasPedal extends CarComponent
         }
         return getNameOfComponent() + " does not decelerate.";
     }
-    
     @Override
-    public boolean action1()
+    public String action1()
     {
-         accelerate();
-         return getIsWorking();
+        return accelerate();
     }
-    
     @Override
-    public boolean action2()
+    public String action2()
     {
-         decelerate();
-         return getIsWorking();
+        return decelerate();
     }
-    
     @Override
     public String fix()
     {
+        String message = "";
         setIsWorking(true);
-        if(getIsWorking())
+        if(!getIsWorking())
         {
-            return getNameOfComponent() +" was already fine and does not need to be fixed.";
+            message+=getNameOfComponent() + " has been fixed";
         }
-        return getNameOfComponent() + " has been fixed and is now working"; 
+        return message;
     }
-    
     @Override
     public String damage()
     {
         setIsWorking(false);
         return getNameOfComponent() + " has ben damaged and does not work";
     }
+    public void setSurfaceAreaInInchesSquared(double surfaceAreaInInchesSquared)
+    {
+        this.surfaceAreaInInchesSquared = surfaceAreaInInchesSquared;
+    }
+    public double getSurfaceAreaInInchesSquared()
+    {
+        return surfaceAreaInInchesSquared;
+    }
 }
-
-//OLD CODE BELOW
-
-// public class GasPedal extends CarComponent
-// {
-//     private double surfaceAreaInCentimeters;
-//     public GasPedal(String nameOfComponent, boolean isWorking, double surfaceAreaInCentimeters)
-//     {
-//         super(nameOfComponent, isWorking);
-//         this.surfaceAreaInCentimeters = surfaceAreaInCentimeters;
-//     }
-
-//     public void setSurfaceAreaInCentimeters(double surfaceAreaInCentimeters)
-//     {
-//         this.surfaceAreaInCentimeters = surfaceAreaInCentimeters;
-//     }
-
-//     public double getSurfaceAreaInCentimeters()
-//     {
-//         return surfaceAreaInCentimeters;
-//     }
-
-//     public String accelerate()
-//     {
-//         if(getIsWorking()){
-//             if((int)((Math.random()*100))+1>90)
-//             {
-//                 setIsWorking(false);
-//                 return getNameOfComponent() + " does not accelerate.";
-//             }
-//             else
-//             {
-//                 return getNameOfComponent() + " accelerates.";
-//             }
-//         }
-//         return getNameOfComponent() + " does not accelerate.";
-//     }
-//     public String decelerate()
-//     {
-//         if(getIsWorking()){
-//             if((int)((Math.random()*100))+1>90)
-//             {
-//                 setIsWorking(false);
-//                 return getNameOfComponent() + " does not decelerate.";
-//             }
-//             else
-//             {
-//                 return getNameOfComponent() + " decelerates.";
-//             }
-//         }
-//         return getNameOfComponent() + " does not decelerate.";
-//     }
-//     @Override
-//     public String action1()
-//     {
-//         return accelerate();
-//     }
-//     @Override
-//     public String action2()
-//     {
-//         return decelerate();
-//     }
-//     @Override
-//     public String fix()
-//     {
-//         setIsWorking(true);
-//         if(getIsWorking())
-//         {
-//             return getNameOfComponent() +" was already fine and does not need to be fixed.";
-//         }
-//         return getNameOfComponent() + " has been fixed and is now working"; 
-//     }
-//     @Override
-//     public String damage()
-//     {
-//         setIsWorking(false);
-//         return getNameOfComponent() + " has ben damaged and does not work";
-//     }
-// }

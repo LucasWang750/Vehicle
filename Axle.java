@@ -20,7 +20,7 @@ public class Axle extends CarComponent
    {
        if (getIsWorking())
        {
-           if (((int)(Math.random() * 100) + 1) > 10)
+           if (!super.conditionalCheck()
            {
                damage();
                return "The axle cannot spin."; 
@@ -37,7 +37,7 @@ public class Axle extends CarComponent
    {
        if (getIsWorking())
        {
-           if (((int)(Math.random() * 100) + 1) > 10)
+           if (!super.conditionalCheck())
            {
                damage();
                return "The axle cannot transfer power."; 
@@ -51,17 +51,17 @@ public class Axle extends CarComponent
    }
    
    @Override
-   public boolean action1()
+   public String action1()
    {
-       spin();
-       return getIsWorking();
+      
+       return  spin();
    }
    
    @Override
-   public boolean action2()
+   public String action2()
    {
-        transferPower();
-        return getIsWorking();
+        
+        return transferPower();
    }
    
    @Override
@@ -128,127 +128,127 @@ public class Axle extends CarComponent
 
 //OLD CODE BELOW
 
-// public class Axle extends CarComponent
-// {
-//    // instance variables
-//    private double thicknessInCm;
-//    private double lengthInCm; 
-//    private boolean isWorking;
-//    // constructors
+public class Axle extends CarComponent
+{
+   // instance variables
+   private double thicknessInCm;
+   private double lengthInCm; 
+   private boolean isWorking;
+   // constructors
    
-//    public Axle(String nameOfComponent, boolean isWorking, double thicknessInCm, double lengthInCm)
-//    {
-//      super(nameOfComponent, isWorking);
-//      this.thicknessInCm = thicknessInCm;
-//      this.lengthInCm = lengthInCm;
-//      //this.isWorking = isWorking;  
-//    }
+   public Axle(String nameOfComponent, boolean isWorking, double thicknessInCm, double lengthInCm)
+   {
+     super(nameOfComponent, isWorking);
+     this.thicknessInCm = thicknessInCm;
+     this.lengthInCm = lengthInCm;
+     //this.isWorking = isWorking;  
+   }
     
-//    // methods
-//    public String spin()
-//    {
-//        if (getIsWorking())
-//        {
-//            if (((int)(Math.random() * 100) + 1) > 10)
-//            {
-//                damage();
-//                return "The axle cannot spin."; 
-//            }
-//            return "The axle spins.";
-//        }
-//        else
-//        {
-//            return "The axle cannot spin."; 
-//        }
-//    }
+   // methods
+   public String spin()
+   {
+       if (getIsWorking())
+       {
+           if (((int)(Math.random() * 100) + 1) > 10)
+           {
+               damage();
+               return "The axle cannot spin."; 
+           }
+           return "The axle spins.";
+       }
+       else
+       {
+           return "The axle cannot spin."; 
+       }
+   }
    
-//    public String transferPower()
-//    {
-//        if (getIsWorking())
-//        {
-//            if (((int)(Math.random() * 100) + 1) > 10)
-//            {
-//                damage();
-//                return "The axle cannot transfer power."; 
-//            }
-//            return "The axle transfers power.";
-//        }
-//        else
-//        {
-//            return "The axle cannot transfer power."; 
-//        }
-//    }
+   public String transferPower()
+   {
+       if (getIsWorking())
+       {
+           if (((int)(Math.random() * 100) + 1) > 10)
+           {
+               damage();
+               return "The axle cannot transfer power."; 
+           }
+           return "The axle transfers power.";
+       }
+       else
+       {
+           return "The axle cannot transfer power."; 
+       }
+   }
    
-//    @Override
-//    public String action1()
-//    {
-//        return spin();
-//    }
+   @Override
+   public String action1()
+   {
+       return spin();
+   }
    
-//    @Override
-//    public String action2()
-//    {
-//        return transferPower();
-//    }
+   @Override
+   public String action2()
+   {
+       return transferPower();
+   }
    
-//    @Override
-//    public String damage()
-//    {
-//        setIsWorking(false);
-//        return "The axle is damaged.";
-//    }
+   @Override
+   public String damage()
+   {
+       setIsWorking(false);
+       return "The axle is damaged.";
+   }
    
-//    @Override
-//    public String fix()
-//    {
-//        if (getIsWorking())
-//            return "The axle is already working.";
-//        else
-//        {
-//            setIsWorking(true);
-//            return "The axle is fixed.";
-//        }
-//    }
+   @Override
+   public String fix()
+   {
+       if (getIsWorking())
+           return "The axle is already working.";
+       else
+       {
+           setIsWorking(true);
+           return "The axle is fixed.";
+       }
+   }
    
-//    @Override
-//    public String toString()
-//    {
-//        String message = "";
-//        message += super.toString();
-//        message += "The thickness in cm is " + getThicknessInCm() + ". \n";
-//        message += "The length in cm is " + getLengthInCm() + ". \n"; 
-//        return message;
-//    } 
+   @Override
+   public String toString()
+   {
+       String message = "";
+       message += super.toString();
+       message += "The thickness in cm is " + getThicknessInCm() + ". \n";
+       message += "The length in cm is " + getLengthInCm() + ". \n"; 
+       return message;
+   } 
    
-//    // getters and setters
-//    public void setThicknessInCm(double thicknessInCm)
-//    {
-//        this.thicknessInCm = thicknessInCm;
-//    }
+   // getters and setters
+   public void setThicknessInCm(double thicknessInCm)
+   {
+       this.thicknessInCm = thicknessInCm;
+   }
    
-//    public double getThicknessInCm()
-//    {
-//        return thicknessInCm; 
-//    }
+   public double getThicknessInCm()
+   {
+       return thicknessInCm; 
+   }
    
-//    public void setLengthInCm(double lengthInCm)
-//    {
-//        this.lengthInCm = lengthInCm;
-//    }
+   public void setLengthInCm(double lengthInCm)
+   {
+       this.lengthInCm = lengthInCm;
+   }
    
-//    public double getLengthInCm()
-//    {
-//        return lengthInCm; 
-//    }
+   public double getLengthInCm()
+   {
+       return lengthInCm; 
+   }
   
-//    public void setIsWorking(boolean isWorking)
-//    {
-//        this.isWorking = isWorking;
-//    }
+   public void setIsWorking(boolean isWorking)
+   {
+       this.isWorking = isWorking;
+   }
    
-//    public boolean getIsWorking()
-//    {
-//        return isWorking; 
-//    }
+   public boolean getIsWorking()
+   {
+       return isWorking; 
+   }
    
-// }
+}
