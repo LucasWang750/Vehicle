@@ -106,7 +106,7 @@ public class Engine extends CarComponent
 
     public String fix(){
         setIsWorking(true); 
-        return "The" + getNameOfComponent() + "received repairs and is now fixed.";
+        return "The " + getNameOfComponent() + " received repairs and is now fixed.";
     }
 
     //getters and setters

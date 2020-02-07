@@ -23,7 +23,7 @@ public class Vehicle {
 	private Radiator radiator;
 	CarComponent[] arr = new CarComponent[8];
 
-  
+
 	// Constructor
 	// removed the speedinMph from constructor
 	public Vehicle(String color, String nameOfCar, String typeOfCar, String fuelType, double weightInPounds,
@@ -229,24 +229,20 @@ public class Vehicle {
 	}
 
 	public boolean drive(double mph) {
-    calculateFailRateOfParts(mph);
+    	calculateFailRateOfParts(mph);
 		speedOfCarMph = mph;
 		if (!carIsWorking) {
 			System.out.println("This " + nameOfCar + " is not working and you cannot drive it.");
 			return false;
 		}
 		if (!carIsOn || !(getSteeringWheel().getIsWorking())) {
-			System.out
-					.println("This " + nameOfCar + " cannot drive because of certain part failures or it didn't start");
-			return false;
+			System.out.println("This " + nameOfCar + " cannot drive because of certain part failures or it didn't start");
 		} else if (mph > maxSpeedMph) {
 			System.out.println("You attempt to drive the car at a high speed. Crash potential increased. ");
 		}
 		if ((Math.random() * 100) + 1 <= calculateCrashRate(mph)) {
 			System.out.println("You attempt to drive the car at a high speed. Your " + nameOfCar + " is now damaged");
-			for (CarComponent i : arr) {
-				i.damage();
-			}
+			damage();
 			carIsWorking = false;
 			carIsOn = false;
 			return false;
@@ -266,7 +262,7 @@ public class Vehicle {
 	}
 
   public void calculateFailRateOfParts(double speedInMph){
-   engine.calculateChanceOfFailure(speedInMph);
+   	engine.calculateChanceOfFailure(speedInMph);
     steeringWheel.calculateChanceOfFailure(speedInMph);
     battery.calculateChanceOfFailure(speedInMph);
     fuelTank.calculateChanceOfFailure(speedInMph);
