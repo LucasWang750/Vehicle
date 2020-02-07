@@ -20,7 +20,7 @@ public class Axle extends CarComponent
    {
        if (getIsWorking())
        {
-           if (!super.conditionalCheck()
+           if (!super.conditionalCheck())
            {
                damage();
                return "The axle cannot spin."; 
@@ -127,7 +127,7 @@ public class Axle extends CarComponent
 }
 
 //OLD CODE BELOW
-
+/*
 public class Axle extends CarComponent
 {
    // instance variables
@@ -252,3 +252,4 @@ public class Axle extends CarComponent
    }
    
 }
+*/

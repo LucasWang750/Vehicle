@@ -95,12 +95,12 @@ public class Trunk extends CarComponent
         }
     }
 
-    public int getDiameterInFeet()
+    public int getdiameterInFeet()
     {
         return this.diameterInFeet;
     }
 
-    public void setDiameterInFeet(int diameterInFeet)
+    public void setdiameterInFeet(int diameterInFeet)
     {
         this.diameterInFeet = diameterInFeet;
     }

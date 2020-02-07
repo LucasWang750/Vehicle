@@ -73,10 +73,10 @@ public class Headlight extends CarComponent{
     setIsWorking(true);
     return "The headlight is fixed.";
   }
-  public void setType(String type){
+  public void setBulbType(String type){
     this.bulbType = type;
   }
-  public String getType(){
+  public String getBulbType(){
     return this.bulbType;
   }
   public void setColor(String color){

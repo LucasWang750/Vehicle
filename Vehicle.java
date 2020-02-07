@@ -23,6 +23,7 @@ public class Vehicle {
 	private Radiator radiator;
 	CarComponent[] arr = new CarComponent[8];
 
+  
 	// Constructor
 	// removed the speedinMph from constructor
 	public Vehicle(String color, String nameOfCar, String typeOfCar, String fuelType, double weightInPounds,
@@ -43,7 +44,7 @@ public class Vehicle {
 			boolean transmissionRingGearIsWorking, boolean transmissionPumpIsWorking, boolean transmissionIsWorking,
 			String nameOfGasPedal, boolean gasPedalIsWorking, double gasPedalSurfaceAreaInInches, String nameOfRadiator,
 			double radiatorTemperatureOfRadiatorFahrenheit, boolean radiatorIsWorking,
-			double radiatorWaterLevelInches) {
+			double radiatorWaterLevelInInches) {
 		this.color = color;
 		this.nameOfCar = nameOfCar;
 		this.typeOfCar = typeOfCar;
@@ -77,7 +78,7 @@ public class Vehicle {
 				transmissionSunGearIsWorking, transmissionPlanetGearIsWorking, transmissionRingGearIsWorking,
 				transmissionPumpIsWorking, transmissionIsWorking);
 		gasPedal = new GasPedal(nameOfGasPedal, gasPedalIsWorking, gasPedalSurfaceAreaInInches);
-		radiator = new Radiator(radiatorTemperatureOfRadiatorFahrenheit, radiatorIsWorking, radiatorWaterLevelInches,
+		radiator = new Radiator(radiatorTemperatureOfRadiatorFahrenheit, radiatorIsWorking, radiatorWaterLevelInInches,
 				nameOfRadiator);
 		arr[0] = engine;
 		arr[1] = steeringWheel;
@@ -228,6 +229,7 @@ public class Vehicle {
 	}
 
 	public boolean drive(double mph) {
+    calculateFailRateOfParts(mph);
 		speedOfCarMph = mph;
 		if (!carIsWorking) {
 			System.out.println("This " + nameOfCar + " is not working and you cannot drive it.");
@@ -262,6 +264,17 @@ public class Vehicle {
 		}
 		return crashRate;
 	}
+
+  public void calculateFailRateOfParts(double speedInMph){
+   engine.calculateChanceOfFailure(speedInMph);
+    steeringWheel.calculateChanceOfFailure(speedInMph);
+    battery.calculateChanceOfFailure(speedInMph);
+    fuelTank.calculateChanceOfFailure(speedInMph);
+    brake.calculateChanceOfFailure(speedInMph);
+    transmission.calculateChanceOfFailure(speedInMph);
+    gasPedal.calculateChanceOfFailure(speedInMph);
+    radiator.calculateChanceOfFailure(speedInMph);
+    }
 
 	public boolean action1() {
 		return true;
